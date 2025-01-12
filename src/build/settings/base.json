@@ -1,5 +1,5 @@
 {
-    "app_name": "IMI",
+    "app_name": "Vial",
     "author": "Infinitec",
     "main_module": "src/main/python/main.py",
     "version": "0.7.1"
