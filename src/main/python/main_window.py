@@ -236,9 +236,9 @@ class MainWindow(QMainWindow):
 
     def on_layout_load(self):
         dialog = QFileDialog()
-        dialog.setDefaultSuffix("vil")
+        dialog.setDefaultSuffix("ivi")
         dialog.setAcceptMode(QFileDialog.AcceptOpen)
-        dialog.setNameFilters(["Vial layout (*.vil)"])
+        dialog.setNameFilters(["IMI Virtual Image (*.ivi)"])
         if dialog.exec_() == QDialog.Accepted:
             with open(dialog.selectedFiles()[0], "rb") as inf:
                 data = inf.read()
@@ -247,9 +247,9 @@ class MainWindow(QMainWindow):
 
     def on_layout_save(self):
         dialog = QFileDialog()
-        dialog.setDefaultSuffix("vil")
+        dialog.setDefaultSuffix("ivi")
         dialog.setAcceptMode(QFileDialog.AcceptSave)
-        dialog.setNameFilters(["Virtual Integrated Layout (*.vil)"])
+        dialog.setNameFilters(["IMI Virtual Image (*.ivi)"])
         if dialog.exec_() == QDialog.Accepted:
             with open(dialog.selectedFiles()[0], "wb") as outf:
                 outf.write(self.keymap_editor.save_layout())
