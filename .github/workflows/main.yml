@@ -82,8 +82,8 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: vial-win
-        path: vial-win.zip
+        name: IMI-win
+        path: IMI-win.zip
 
     - name: Create installer
       run: |
