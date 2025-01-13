@@ -78,7 +78,7 @@ jobs:
       run: |
         . .\venv\Scripts\activate.ps1
         fbs freeze
-        Compress-Archive -Path "target\IMI" -DestinationPath IMI-win.zip
+        Compress-Archive -Path "target\IMI" -DestinationPath IMI-win
 
     - uses: actions/upload-artifact@v3
       with:
