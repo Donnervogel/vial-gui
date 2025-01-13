@@ -153,10 +153,10 @@ class MainWindow(QMainWindow):
         layout_save_act.setShortcut("Ctrl+S")
         layout_save_act.triggered.connect(self.on_layout_save)
 
-        sideload_json_act = QAction(tr("MenuFile", "Sideload VIA JSON..."), self)
+        sideload_json_act = QAction(tr("MenuFile", "Sideload IMI JSON..."), self)
         sideload_json_act.triggered.connect(self.on_sideload_json)
 
-        download_via_stack_act = QAction(tr("MenuFile", "Download VIA definitions"), self)
+        download_via_stack_act = QAction(tr("MenuFile", "Download IMI definitions"), self)
         download_via_stack_act.triggered.connect(self.load_via_stack_json)
 
         load_dummy_act = QAction(tr("MenuFile", "Load dummy JSON..."), self)
@@ -226,7 +226,7 @@ class MainWindow(QMainWindow):
             if theme_group.checkedAction() is None:
                 theme_group.actions()[0].setChecked(True)
 
-        about_vial_act = QAction(tr("MenuAbout", "About Vial..."), self)
+        about_vial_act = QAction(tr("MenuAbout", "About IMI..."), self)
         about_vial_act.triggered.connect(self.about_vial)
         self.about_keyboard_act = QAction("", self)
         self.about_keyboard_act.triggered.connect(self.about_keyboard)
@@ -249,7 +249,7 @@ class MainWindow(QMainWindow):
         dialog = QFileDialog()
         dialog.setDefaultSuffix("vil")
         dialog.setAcceptMode(QFileDialog.AcceptSave)
-        dialog.setNameFilters(["Vial layout (*.vil)"])
+        dialog.setNameFilters(["Virtual Integrated Layout (*.vil)"])
         if dialog.exec_() == QDialog.Accepted:
             with open(dialog.selectedFiles()[0], "wb") as outf:
                 outf.write(self.keymap_editor.save_layout())
@@ -410,10 +410,8 @@ class MainWindow(QMainWindow):
         self.current_tab = new_tab
 
     def about_vial(self):
-        title = "About Vial"
-        text = 'Vial {}<br><br>Python {}<br>Qt {}<br><br>' \
-               'Licensed under the terms of the<br>GNU General Public License (version 2 or later)<br><br>' \
-               '<a href="https://get.vial.today/">https://get.vial.today/</a>' \
+        title = "About IMI"
+        text = 'IMI {}<br><br>Python {}<br>Qt {}<br><br>' \
                .format(qApp.applicationVersion(),
                        platform.python_version(), QT_VERSION_STR)
 

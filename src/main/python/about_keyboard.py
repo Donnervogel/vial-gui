@@ -61,7 +61,7 @@ class AboutKeyboard(QDialog):
         text += "\n"
 
         text += "IMI protocol: {}\n".format(self.keyboard.vial_protocol)
-        text += "IMIl keyboard ID: {:08X}\n".format(self.keyboard.keyboard_id)
+        text += "IMI keyboard ID: {:08X}\n".format(self.keyboard.keyboard_id)
         text += "\n"
 
         text += "Macro entries: {}\n".format(self.keyboard.macro_count)
