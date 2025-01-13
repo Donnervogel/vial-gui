@@ -78,7 +78,7 @@ jobs:
       run: |
         . .\venv\Scripts\activate.ps1
         fbs freeze
-        Compress-Archive -Path "target\Vial" -DestinationPath vial-win.zip
+        Compress-Archive -Path "target\IMI" -DestinationPath IMI-win.zip
 
     - uses: actions/upload-artifact@v3
       with:
@@ -93,5 +93,5 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: vial-win-installer
-        path: target\VialSetup.exe
+        name: IMI-win-installer
+        path: target\IMISetup.exe
