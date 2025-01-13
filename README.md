@@ -1,4 +1,4 @@
-### vial-gui
+### vial-gui Infinitec
 
 # Docs and getting started
 
