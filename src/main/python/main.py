@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 import ssl
-import certifi
+import certifi # type: ignore
 import os
 
 if ssl.get_default_verify_paths().cafile is None:
