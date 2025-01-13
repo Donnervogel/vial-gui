@@ -54,7 +54,7 @@ class TapDanceEntryUI(QObject):
         self.kc_on_double_tap = KeyWidget()
         self.kc_on_double_tap.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_double_tap, 2, 1)
-        self.container.addWidget(QLabel("On tap + hold"), 3, 0)
+        self.container.addWidget(QLabel("On double + hold"), 3, 0)
         self.kc_on_tap_hold = KeyWidget()
         self.kc_on_tap_hold.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_tap_hold, 3, 1)
@@ -68,10 +68,16 @@ class TapDanceEntryUI(QObject):
     def widget(self):
         return self.w2
 
-    def load(self, data):
+    def load(self, data, keyboard=None):
         objs = [self.kc_on_tap, self.kc_on_hold, self.kc_on_double_tap, self.kc_on_tap_hold, self.txt_tapping_term]
         for o in objs:
             o.blockSignals(True)
+        self.kc_on_tap.set_keyboard(keyboard)
+        self.kc_on_double_tap.set_keyboard(keyboard)
+        self.kc_on_tap_hold.set_keyboard(keyboard)
+        self.kc_on_hold.set_keyboard(keyboard)
+
+
 
         self.kc_on_tap.set_keycode(data[0])
         self.kc_on_hold.set_keycode(data[1])
@@ -134,7 +140,7 @@ class TapDance(BasicEditor):
 
     def reload_ui(self):
         for x, e in enumerate(self.tap_dance_entries):
-            e.load(self.keyboard.tap_dance_get(x))
+            e.load(self.keyboard.tap_dance_get(x), self.device.keyboard)
         self.update_modified_state()
 
     def on_save(self):
