@@ -2,9 +2,7 @@
 import json
 
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QMessageBox, QWidget
-from PyQt5.QtCore import Qt, pyqtSignal, QSize, QRect
-from PyQt5.QtGui import QPainter
-from PyQt5.QtSvg import QSvgGenerator
+from PyQt5.QtCore import Qt, pyqtSignal
 
 from any_keycode_dialog import AnyKeycodeDialog
 from editor.basic_editor import BasicEditor
@@ -124,7 +122,7 @@ class KeymapEditor(BasicEditor):
             self.current_layer = 0
             self.on_layout_changed()
 
-            self.tabbed_keycodes.recreate_keycode_buttons(self.keyboard)
+            self.tabbed_keycodes.recreate_keycode_buttons()
             TabbedKeycodes.tray.recreate_keycode_buttons()
             self.refresh_layer_display()
         self.container.setEnabled(self.valid())
@@ -146,29 +144,7 @@ class KeymapEditor(BasicEditor):
         self.keyboard.restore_layout(data)
         self.refresh_layer_display()
 
-def export_as_svg(self, filename):
-        widget = self.container
-        generator = QSvgGenerator()
-        generator.setSize(QSize(widget.width, widget.height * self.keyboard.layers))
-        generator.setViewBox(QRect(0, 0, widget.width, widget.height * self.keyboard.layers))
-        generator.setFileName(filename)
-        generator.setTitle("My Keymap")
-        generator.setDescription("Keymap generated from Vial")
-        painter = QPainter()
-        painter.begin(generator)
-        current_layer = self.current_layer
-        current_style = widget.styleSheet()
-        widget.setStyleSheet("background: transparent;")
-        for x in range(self.keyboard.layers):
-            self.switch_layer(x)
-            widget.render(painter)
-            if x != self.keyboard.layers - 1:
-                painter.translate(0, widget.height)
-        self.switch_layer(current_layer)
-        widget.setStyleSheet(current_style)
-        painter.end()
-
-def on_any_keycode(self):
+    def on_any_keycode(self):
         if self.container.active_key is None:
             return
         current_code = self.code_for_widget(self.container.active_key)
@@ -181,18 +157,18 @@ def on_any_keycode(self):
         self.dlg.setModal(True)
         self.dlg.show()
 
-def on_dlg_finished(self, res):
+    def on_dlg_finished(self, res):
         if res > 0:
             self.on_keycode_changed(self.dlg.value)
 
-def code_for_widget(self, widget):
+    def code_for_widget(self, widget):
         if widget.desc.row is not None:
             return self.keyboard.layout[(self.current_layer, widget.desc.row, widget.desc.col)]
         else:
             return self.keyboard.encoder_layout[(self.current_layer, widget.desc.encoder_idx,
                                                  widget.desc.encoder_dir)]
 
-def refresh_layer_display(self):
+    def refresh_layer_display(self):
         """ Refresh text on key widgets to display data corresponding to current layer """
 
         self.container.update_layout()
@@ -203,16 +179,16 @@ def refresh_layer_display(self):
 
         for widget in self.container.widgets:
             code = self.code_for_widget(widget)
-            KeycodeDisplay.display_keycode(widget, code, self.keyboard)
+            KeycodeDisplay.display_keycode(widget, code)
         self.container.update()
         self.container.updateGeometry()
 
-def switch_layer(self, idx):
+    def switch_layer(self, idx):
         self.container.deselect()
         self.current_layer = idx
         self.refresh_layer_display()
 
-def set_key(self, keycode):
+    def set_key(self, keycode):
         """ Change currently selected key to provided keycode """
 
         if self.container.active_key is None:
@@ -225,7 +201,7 @@ def set_key(self, keycode):
 
         self.container.select_next()
 
-def set_key_encoder(self, keycode):
+    def set_key_encoder(self, keycode):
         l, i, d = self.current_layer, self.container.active_key.desc.encoder_idx,\
                             self.container.active_key.desc.encoder_dir
 
@@ -241,7 +217,7 @@ def set_key_encoder(self, keycode):
         self.keyboard.set_encoder(l, i, d, keycode)
         self.refresh_layer_display()
 
-def set_key_matrix(self, keycode):
+    def set_key_matrix(self, keycode):
         l, r, c = self.current_layer, self.container.active_key.desc.row, self.container.active_key.desc.col
 
         if r >= 0 and c >= 0:
@@ -257,7 +233,7 @@ def set_key_matrix(self, keycode):
             self.keyboard.set_key(l, r, c, keycode)
             self.refresh_layer_display()
 
-def on_key_clicked(self):
+    def on_key_clicked(self):
         """ Called when a key on the keyboard widget is clicked """
         self.refresh_layer_display()
         if self.container.active_mask:
@@ -265,15 +241,15 @@ def on_key_clicked(self):
         else:
             self.tabbed_keycodes.set_keycode_filter(None)
 
-def on_key_deselected(self):
+    def on_key_deselected(self):
         self.tabbed_keycodes.set_keycode_filter(None)
 
-def on_layout_changed(self):
+    def on_layout_changed(self):
         if self.keyboard is None:
             return
 
         self.refresh_layer_display()
         self.keyboard.set_layout_options(self.layout_editor.pack())
 
-def on_keymap_override(self):
+    def on_keymap_override(self):
         self.refresh_layer_display()

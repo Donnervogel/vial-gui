@@ -2,19 +2,14 @@
 import ssl
 import certifi # type: ignore
 import os
-from functools import cached_property
-from glob import glob
-import json
 
 if ssl.get_default_verify_paths().cafile is None:
     os.environ['SSL_CERT_FILE'] = certifi.where()
-from os import path
-import sys
+
 import traceback
 
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QApplication
 
 from fbs_runtime.application_context import cached_property
 from fbs_runtime.application_context.PyQt5 import ApplicationContext

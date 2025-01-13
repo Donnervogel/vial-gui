@@ -47,16 +47,14 @@ class ComboEntryUI(QObject):
     def widget(self):
         return self.w2
 
-    def load(self, data, keyboard=None):
+    def load(self, data):
         objs = self.kc_inputs + [self.kc_output]
         for o in objs:
             o.blockSignals(True)
 
         for x in range(4):
             self.kc_inputs[x].set_keycode(data[x])
-            self.kc_inputs[x].set_keyboard(keyboard)
         self.kc_output.set_keycode(data[4])
-        self.kc_output.set_keyboard(keyboard)
 
         for o in objs:
             o.blockSignals(False)
@@ -97,7 +95,7 @@ class Combos(BasicEditor):
         for x, e in enumerate(self.combo_entries):
             self.tabs.addTab(e.widget(), str(x + 1))
         for x, e in enumerate(self.combo_entries):
-            e.load(self.keyboard.combo_get(x), self.keyboard)
+            e.load(self.keyboard.combo_get(x))
 
     def rebuild(self, device):
         super().rebuild(device)
