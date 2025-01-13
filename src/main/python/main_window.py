@@ -29,7 +29,7 @@ from editor.tap_dance import TapDance
 from unlocker import Unlocker
 from util import tr, EXAMPLE_KEYBOARDS, KeycodeDisplay, EXAMPLE_KEYBOARD_PREFIX
 from vial_device import VialKeyboard
-from editor.matrix_test import MatrixTest
+
 
 import themes
 
@@ -78,13 +78,12 @@ class MainWindow(QMainWindow):
         self.key_override = KeyOverride()
         QmkSettings.initialize(appctx)
         self.qmk_settings = QmkSettings()
-        self.matrix_tester = MatrixTest(self.layout_editor)
         self.rgb_configurator = RGBConfigurator()
 
         self.editors = [(self.keymap_editor, "Keymap"), (self.layout_editor, "Layout"), (self.macro_recorder, "Macros"),
                         (self.rgb_configurator, "Lighting"), (self.tap_dance, "Tap Dance"), (self.combos, "Combos"),
                         (self.key_override, "Key Overrides"), (self.qmk_settings, "QMK Settings"),
-                        (self.matrix_tester, "Matrix tester"), (self.firmware_flasher, "Firmware updater")]
+                        (self.firmware_flasher, "Firmware updater")]
 
         Unlocker.global_layout_editor = self.layout_editor
         Unlocker.global_main_window = self
@@ -309,7 +308,7 @@ class MainWindow(QMainWindow):
             self.autorefresh.current_device.keyboard.reload()
 
         for e in [self.layout_editor, self.keymap_editor, self.firmware_flasher, self.macro_recorder,
-                  self.tap_dance, self.combos, self.key_override, self.qmk_settings, self.matrix_tester,
+                  self.tap_dance, self.combos, self.key_override, self.qmk_settings,
                   self.rgb_configurator]:
             e.rebuild(self.autorefresh.current_device)
 
