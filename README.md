@@ -1,5 +1,6 @@
 ### vial-gui Infinitec
 
+
 # Docs and getting started
 
 ### Please visit [get.vial.today](https://get.vial.today/) to get started with Vial
