@@ -80,7 +80,7 @@ jobs:
         fbs freeze
         Compress-Archive -Path "target\IMI" -DestinationPath IMI-win
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: IMI-win
         path: IMI-win.zip
@@ -91,7 +91,7 @@ jobs:
         . .\venv\Scripts\activate.ps1
         fbs installer
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: IMI-win-installer
         path: target\IMISetup.exe
